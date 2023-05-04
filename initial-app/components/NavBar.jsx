@@ -2,12 +2,39 @@ import React from 'react'
 import styles from './NavBar.module.css'
 import { ActiveLink } from './ActiveLink'
 
+const menuItems = [
+  {
+      text: 'Home',
+      href: '/'
+  },
+  {
+      text: 'About',
+      href: '/about'
+  },
+  {
+      text: 'Contact',
+      href: '/contact'
+  },
+  {
+      text: 'Pricing',
+      href: '/pricing'
+  },
+  {
+      text: 'API',
+      href: 'api/hello'
+  }
+];
+
 export const NavBar = () => {
   return (
     <nav className={styles.menu}>
-        <ActiveLink text='Home' href='/' />
-        <ActiveLink text='About' href='/about' />
-        <ActiveLink text='API' href='/api/hello' />
+      
+      {
+        menuItems.map( ({ text, href }) => (
+          <ActiveLink text={text} href={href} />
+          )
+        )
+      }
     </nav>
   )
 }

@@ -1,16 +1,18 @@
+import { useRouter } from "next/router"
+
 import Link from "next/link"
 
 const style = {
-    color: blue,
-    textDecoration: 'underline'
+    textDecoration: 'underline',
+    color: 'blue'
 }
 // Desestrucutracion. Se pasan argumentos
 export const ActiveLink = ({text, href}) => {
-  return (
-
-
-
-    <Link href={ href } style={style}>
+  
+    const { asPath } = useRouter();
+    
+    return (
+    <Link href={ href } style={ asPath === href ? style : null }>
         { text }
     </Link>
     )

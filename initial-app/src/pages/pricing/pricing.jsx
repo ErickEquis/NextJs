@@ -1,16 +1,15 @@
 import Image from 'next/image'
 import { Inter } from 'next/font/google'
 import styles from '@erick/styles/Home.module.css'
+import { MainLayouts } from '../../../components/layouts/MainLayouts'
 import Link from 'next/link'
-import { MainLayouts } from '../../components/layouts/MainLayouts'
-import { DarkLayout } from '../../components/layouts/DarkLayout'
 
 const inter = Inter({ subsets: ['latin'] })
 
 export default function AboutPage() {
   return (
-    <>
-      <h1>About</h1>
+    <MainLayouts>
+      <h1>Pricing</h1>
       <div className={styles.center}>
         <Image
           className={styles.logo}
@@ -37,17 +36,6 @@ export default function AboutPage() {
           </p>
         </Link>
       </div>
-    </>
-  )
-}
-
-// getLayout permite anidar Layouts
-AboutPage.getLayout = function getLayout( page ) {
-  return(
-    <MainLayouts>
-      <DarkLayout>
-        { page }
-      </DarkLayout>
     </MainLayouts>
   )
 }
