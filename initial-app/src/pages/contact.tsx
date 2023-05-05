@@ -1,7 +1,7 @@
 import Image from 'next/image'
 import { Inter } from 'next/font/google'
-import styles from '@erick/styles/Home.module.css'
-import { MainLayouts } from '../../../components/layouts/MainLayouts'
+import styles from '../styles/Home.module.css'
+import { MainLayouts } from '../../components/layouts/MainLayouts'
 import Link from 'next/link'
 
 const inter = Inter({ subsets: ['latin'] })
@@ -9,7 +9,7 @@ const inter = Inter({ subsets: ['latin'] })
 export default function AboutPage() {
   return (
     <MainLayouts>
-      <h1>Pricing</h1>
+      <h1>Contact</h1>
       <div className={styles.center}>
         <Image
           className={styles.logo}

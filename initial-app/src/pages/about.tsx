@@ -1,6 +1,6 @@
 import Image from 'next/image'
 import { Inter } from 'next/font/google'
-import styles from '@erick/styles/Home.module.css'
+import styles from '../styles/Home.module.css'
 import Link from 'next/link'
 import { MainLayouts } from '../../components/layouts/MainLayouts'
 import { DarkLayout } from '../../components/layouts/DarkLayout'
@@ -42,7 +42,7 @@ export default function AboutPage() {
 }
 
 // getLayout permite anidar Layouts
-AboutPage.getLayout = function getLayout( page ) {
+AboutPage.getLayout = function getLayout( page: JSX.Element ) {
   return(
     <MainLayouts>
       <DarkLayout>

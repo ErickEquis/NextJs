@@ -1,10 +1,10 @@
-import React from 'react'
 import style from './MainLayout.module.css';
 import { NavBar } from '../NavBar';
 import Head from 'next/head'
 // import { Inter } from 'next/font/google';
+import { PropsWithChildren } from 'react';
 
-export const MainLayouts = ({ children }) => {
+export const MainLayouts: React.FC<PropsWithChildren> = ({ children }) => {
     return (
         <>
           {/* Permite agregar informacion a <head> */}

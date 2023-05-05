@@ -17,7 +17,7 @@ const menuItems = [
   },
   {
       text: 'Pricing',
-      href: '/pricing'
+      href: 'pricing/pricing'
   },
   {
       text: 'API',
