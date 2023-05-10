@@ -1,11 +1,14 @@
 import Image from "next/image"
+// Libreria NextUI; similar a Bootstrap
 import { Spacer, Text, useTheme } from "@nextui-org/react"
 
 export const Navbar = () => {
 
-    const { theme } = useTheme()
+  // 'Hook': permite hacer funcionales a los estados de React.
+  const { theme } = useTheme()
 
   return (
+    // Codigo CSS
     <div style={{
         display: 'flex',
         width: '100%',

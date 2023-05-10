@@ -1,1 +1,3 @@
-export * from './pokemonCard'
+// Exportando componentes de '/PokemonCard'
+
+export * from './PokemonCard'
