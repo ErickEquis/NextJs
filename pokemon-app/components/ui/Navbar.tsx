@@ -1,6 +1,7 @@
 import Image from "next/image"
+import NextLink from "next/link"
 // Libreria NextUI; similar a Bootstrap
-import { Spacer, Text, useTheme } from "@nextui-org/react"
+import { Spacer, Text, useTheme, Link } from "@nextui-org/react"
 
 export const Navbar = () => {
 
@@ -19,17 +20,31 @@ export const Navbar = () => {
         backgroundColor: theme?.colors.gray100.value
     }}>
 
-        <Image
-            src='https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/3.png'
-            alt="icono de app"
-            width={70}
-            height={70}
-        />
+        <NextLink href='/' passHref legacyBehavior>
+          <Link>
+            <Image
+                src='https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/3.png'
+                alt="icono de app"
+                width={70}
+                height={70}
+            />
+          </Link>
+        </NextLink>
 
-        <Text color='white' h2>P</Text>
-        <Text color='white'h3>okémon</Text>
+        <NextLink href='/' passHref legacyBehavior>
+          <Link>
+            <Text color='white' h2>P</Text>
+            <Text color='white'h3>okémon</Text>
+          </Link>
+        </NextLink>
+
         <Spacer css={{flex: 1}}/>
-        <Text color='white'h3>Favoritos</Text>
+
+        <NextLink href='/favorites' passHref legacyBehavior>
+          <Link css={{ marginRight: '10px' }}>
+            <Text color='white'h3>Favoritos</Text>
+          </Link>
+        </NextLink>
     </div>
   )
 }
