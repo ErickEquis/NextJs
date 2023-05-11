@@ -1,7 +1,7 @@
 
 // Manejo de favoritos
 // Graba en LocalStorage
-const toggleFavorite = ( id: number ) => {
+const toggleFavorites = ( id: number ) => {
 
     // Transforma el objeto JSON en el LocalStorage
     let favorites: number[] = JSON.parse( localStorage.getItem('favorites') || '[]' )
@@ -22,15 +22,27 @@ const toggleFavorite = ( id: number ) => {
 
 // Verificar si existe en LocalStorage
 // Regresa booleano por '.includes'
-const existInFavorite = ( id: number ): boolean => {
+const existInFavorites = ( id: number ): boolean => {
     
-    // Obtiene el ebjeto del JSON en el LocalStorage
-    const favorites: number[] = JSON.parse( localStorage.getItem('favorites') || '[]' )
+    if (typeof window === 'undefined' ) return false
 
+    // Obtiene el ebjeto del JSON en el LocalStorage
+    // 'const' ya que no se manipulará
+    const favorites: number[] = JSON.parse( localStorage.getItem('favorites') || '[]' )
+    
+    // 'includes' devuelvre booleano si encuentra o no 'id'
     return favorites.includes( id )
 }
 
+
+// Arreglo que obtiene todos los pokemons alnacenados en localStorage
+const pokemons = (): number[] => {
+    return JSON.parse( localStorage.getItem('favorites') || '[]' )
+}
+
+// Exportando componentes
 export default{
-    toggleFavorite,
-    existInFavorite
+    toggleFavorites,
+    existInFavorites,
+    pokemons
 }

@@ -6,7 +6,7 @@ import { pokeApi } from '../../../api';
 import { Layout } from '../../../components/layouts'
 import { Pokemon } from '../../../interfaces';
 import { Button, Card, Container, Grid, Image, Text } from '@nextui-org/react';
-import { localFavorite } from '../../../utils';
+import { localFavorites } from '../../../utils';
 
 // Interfaz para tipado TS
 interface Props{
@@ -17,12 +17,15 @@ interface Props{
 // Desestructuracion de 'props' necesarios 
 const PokemonPage: NextPage<Props> = ({ pokemon }) => {
 
-  const [isInFavorites, setisInFavorites] = useState( localFavorite.existInFavorite( pokemon.id ) )
+  // Hook que mantiene y modifica el estado de componente
+  // 'localFavorite.existInFavorite( pokemon.id )' indica el estado si esta o no en favoritos
+  const [isInFavorites, setisInFavorites] = useState( typeof window === 'undefined' && localFavorites.existInFavorites( pokemon.id ) )
 
   // Guarda al pokemon en 'favoritos'
   const onToggleFavorite = () => {
     // Importa funcion 'toggleFavorite' de 'localFavorite' pasando prop 'id'
-    localFavorite.toggleFavorite( pokemon.id )
+    localFavorites.toggleFavorites( pokemon.id )
+    setisInFavorites( !isInFavorites )
   }
 
   return (
@@ -54,7 +57,7 @@ const PokemonPage: NextPage<Props> = ({ pokemon }) => {
                 // Agrega funcion 'onToggleFavorite' en el boton y se ejecuta cuando se presiona
                 onPress={ onToggleFavorite }
               >
-                Guardar en favoritos
+                { isInFavorites ? 'En favoritos' : 'Guradar en favoritos' }
               </Button>
             </Card.Header>
             {/* Cartas secundarias */}

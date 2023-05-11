@@ -1,3 +1,3 @@
 
 // Se llamara con este nombre
-export { default as localFavorite } from './localFavorites'
+export { default as localFavorites } from './localFavorites'

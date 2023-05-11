@@ -1,11 +1,32 @@
+import { useEffect, useState } from 'react'
 import { Layout } from '../../../components/layouts'
+import { NoFavorites } from '../../../components/ui'
+import { localFavorites } from '../../../utils'
+import { FavoritePokemons } from '../../../components/pokemon'
 
 
 function FavoritesPage() {
+  
+  // 'useState' para actulizar estado de favoritos 
+const [favoritePokemons, setfavoritePokemons] = useState<number[]>([])
+
+  // Cargar arreglo desde el lado del cliente
+  // El arreglo fue obtenido desde '/utils
+  useEffect(() => {
+    setfavoritePokemons( localFavorites.pokemons() )    
+  }, [])
+  
+
   return (
 
+    // Llama componente para crear pagina
     <Layout title='Pokemons - Favoritos'>
-      <h1>Favoritos</h1>
+      {/* Condicional para mostrar cuando haya y no haya favoritos */}
+      {
+        favoritePokemons.length === 0
+          ? ( <NoFavorites/> )
+          : ( <FavoritePokemons pokemons={favoritePokemons}/> )
+      }
     </Layout>
 
   )
