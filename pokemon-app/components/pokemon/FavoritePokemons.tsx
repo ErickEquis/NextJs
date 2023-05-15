@@ -11,10 +11,11 @@ export const FavoritePokemons: FC<Props> = ({ pokemons }) => {
     // Estilo de tarjetas
     <Grid.Container gap={ 2 } direction='row' justify='flex-start'>
         {
-        // Mapeo de arreglo que contiene favoritos
-        pokemons.map( id => (
+          // Mapeo de arreglo que contiene favoritos
+          pokemons.map( id => (
+            // Se recibe componente y con el argumentos creados en este archivo
             <FavoriteCardPokemons key={ id } pokemonId={ id }/>
-        ))                
+          ))
         }
     </Grid.Container>
   )

@@ -11,9 +11,9 @@ function FavoritesPage() {
 const [favoritePokemons, setfavoritePokemons] = useState<number[]>([])
 
   // Cargar arreglo desde el lado del cliente
-  // El arreglo fue obtenido desde '/utils
+  // El arreglo fue obtenido desde '/utils'
   useEffect(() => {
-    setfavoritePokemons( localFavorites.pokemons() )    
+    setfavoritePokemons( localFavorites.pokemons() )
   }, [])
   
 
@@ -21,7 +21,7 @@ const [favoritePokemons, setfavoritePokemons] = useState<number[]>([])
 
     // Llama componente para crear pagina
     <Layout title='Pokemons - Favoritos'>
-      {/* Condicional para mostrar cuando haya y no haya favoritos */}
+      {/* Condicional para mostrar cuando haya o no haya favoritos */}
       {
         favoritePokemons.length === 0
           ? ( <NoFavorites/> )

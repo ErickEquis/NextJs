@@ -7,6 +7,7 @@ interface Props extends PropsWithChildren{
   title?: string
 }
 
+const origin = (typeof window === 'undefined') ? '' : window.location.origin
 
 export const Layout: React.FC<Props> = ({ children, title }) => {
   return (
@@ -18,6 +19,11 @@ export const Layout: React.FC<Props> = ({ children, title }) => {
             <meta name="author" content="Erick"/>
             <meta name="description" content={`Informacion sobre ${ title }`}/>
             <meta name="keywords" content={`${ title }, pokemon, pokedex`}/>
+            
+            {/* Muestra los metadatos al compartir pagina */}
+            <meta property="og:title" content={`Informacion sobre ${ title }`} />
+            <meta property="og:description" content={`Esta el pagina sobre ${ title }`} />
+            <meta property="og:image" content={`${ origin }/img/banner.png`} />
         </Head>
 
         {/* Componente propio */}

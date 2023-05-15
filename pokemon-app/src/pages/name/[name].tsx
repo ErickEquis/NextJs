@@ -4,7 +4,7 @@ import { useState } from 'react';
 import { NextPage, GetStaticProps, GetStaticPaths } from 'next';
 import { pokeApi } from '../../../api';
 import { Layout } from '../../../components/layouts'
-import { Pokemon } from '../../../interfaces';
+import { Pokemon, PokemonListResponse } from '../../../interfaces';
 import { Button, Card, Container, Grid, Image, Text } from '@nextui-org/react';
 import { getPokemonInfo, localFavorites } from '../../../utils';
 import confetti from 'canvas-confetti'
@@ -16,7 +16,7 @@ interface Props{
 
 // Genera paginas con informacion con 'id' y 'name' de cada pokemon
 // Desestructuracion de 'props' necesarios 
-const PokemonPage: NextPage<Props> = ({ pokemon }) => {
+const PokemonByNamePage: NextPage<Props> = ({ pokemon }) => {
 
   // Hook que mantiene y modifica el estado de componente
   // 'localFavorite.existInFavorite( pokemon.id )' indica el estado si esta o no en favoritos
@@ -112,19 +112,22 @@ const PokemonPage: NextPage<Props> = ({ pokemon }) => {
 }
 
 
-// Al ser [id] dinamico se utiliza 'GetStaticPaths' para generar rutas estaticas (pre-renderizar).
+// Al ser [name] dinamico se utiliza 'GetStaticPaths' para generar rutas estaticas (pre-renderizar).
 // Se ejecuta en el lado del servidor y en 'build time'
 // Se crean primero las paginas y despues recibiran los argumentos para su presentacion
 export const getStaticPaths: GetStaticPaths = async (ctx) => {
 
-  // Funcion que crea un arreglo de 1 al 151
-  const pokemon151 = [...Array(151)].map( ( value, index ) => `${ index + 1 }`)
+  // Funcion que crea un arreglo de pokemons del 1 al 151
+  const { data } = await pokeApi.get<PokemonListResponse>('/pokemon?limit=151')
+  
+  // Funcion que mete a un arreglo los 'name' de cada pokemon
+  const pokemonName: string[] = data.results.map( pokemon => pokemon.name )
 
   return {
     // Cantidad de paginas que se crearan
-    paths: pokemon151.map( id => ({
-      // Parametro que recibira [id] (deben ser 'string' por ser URL)
-      params: { id }
+    paths: pokemonName.map( name => ({
+      // Parametro que recibira [name] (deben ser 'string' por ser URL)
+      params: { name }
     })),
     // Manda 'erro404' si se ingresa a una URL no encontrada
     fallback: false
@@ -134,15 +137,15 @@ export const getStaticPaths: GetStaticPaths = async (ctx) => {
 // Destructuracion de ctx (contexto). Recibe los id
 export const getStaticProps: GetStaticProps = async ( { params } ) => {
 
-  // Creando variable 'id' que viene de ctx destructurada y tipada como string
-  const { id } = params as { id: string }
+  // Creando variable 'name' que viene de ctx destructurada y tipada como string
+  const { name } = params as { name: string }
 
   return {
     props: {
       // Objeto 'pokemon' contenido en 'data'
-      pokemon: await getPokemonInfo( id )
+      pokemon: await getPokemonInfo( name )
     }
   }
 }
 
-export default PokemonPage
+export default PokemonByNamePage
