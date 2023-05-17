@@ -1,5 +1,6 @@
 import { createContext } from "react"
 
+// Interfaz que permite pasar toda la informacion a los componentes que ocupen el 'context'
 interface ContextProps {
     sidemenuOpen: boolean;
     isAddingEntry: boolean;
