@@ -1,3 +1,5 @@
+// Trabajar con la base de datos
+
 import mongoose from "mongoose";
 
 /**
@@ -7,18 +9,24 @@ import mongoose from "mongoose";
  * 3 = disconnecting
  */
 
+
 const mongooConnection = {
     isConnected: 0
 }
 
+// Establecer conexion 
+// 'async' le dice a la funcion que las peticiones no se realizan en el mismo momento
+// y llegan a tardarse 
 export const connect = async() => {
     
     if ( mongooConnection.isConnected ) {
         console.log('Ya estabamos conectados');
+        console.log(mongooConnection.isConnected)
         return;
     }
 
     if ( mongoose.connections.length > 0 ) {
+
         mongooConnection.isConnected = mongoose.connections[0].readyState;
 
         if ( mongooConnection.isConnected === 1 ) {
@@ -26,21 +34,29 @@ export const connect = async() => {
             return;
         }
 
+        // 'await' permite hacer que se espere la funcion a ejecutar la linea y despues la ejecuta
+        // Desconexion de la BD
         await mongoose.disconnect();
     }
 
+    // conexion a base de datos local 'process.env.MONGO_URL' = URL
     await mongoose.connect(process.env.MONGO_URL || '');
+    // Cambia estado a conectado (1)
     mongooConnection.isConnected = 1;
     console.log('Conectado a MongoDB:', process.env.MONGO_URL)
 
 }
 
+// Funcion que permite desconectarce
 export const disconnect = async() => {
 
+    // Si esta en desarrollo se termina proceso
     if ( process.env.NODE_ENV === 'development' ) return;
     
+    // Si esta desconectado se termina el proceso
     if ( mongooConnection.isConnected == 0 ) return;
 
+    // Si esta conectado lo desconecta
     await mongoose.disconnect();
     console.log('Desconectado de MongoDB')
 

@@ -10,7 +10,7 @@ export default function (req: NextApiRequest, res: NextApiResponse<Data>) {
 
     switch ( req.method ) {
         case 'GET':
-            return getEntries( res )    
+            return getEntries( res )
 
         default:
             return res.status(400).json({ message: 'Endpoint no existe' });
