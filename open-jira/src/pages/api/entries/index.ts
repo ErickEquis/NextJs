@@ -2,10 +2,12 @@ import type { NextApiRequest, NextApiResponse } from 'next'
 import { db } from '../../../../database';
 import { Entry, IEntry } from '../../../../models';
 
+// Tipado TS
 type Data = 
     | { message: string }
     | IEntry[]
 
+    // Manejo de peticiones
 export default function (req: NextApiRequest, res: NextApiResponse<Data>) {
 
     switch ( req.method ) {
@@ -18,7 +20,9 @@ export default function (req: NextApiRequest, res: NextApiResponse<Data>) {
 
 }
 
+// Obtencion de datos
 const getEntries = async( res: NextApiResponse<Data> ) => {
+
 
     await db.connect();
     const entries = await Entry.find().sort({ createAt: 'ascending' });

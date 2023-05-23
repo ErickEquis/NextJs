@@ -10,6 +10,7 @@ interface SeedEntry {
     createAt: number
 }
 
+// Documentos que seran ingresados a la BD
 export const seedData: SeedData = {
     entries: [        
         {

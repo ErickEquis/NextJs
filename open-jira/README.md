@@ -14,7 +14,7 @@ mongodb://localhost:27017/entriesdb
 ## Configurar las variables de entorno
 Renombrar el archivo __.env.templete__ a __.env__
 
-## LLenar la base de datos con informacion de oruebas
+## LLenar la base de datos con informacion de pruebas
 
 Llamara:
 ```
