@@ -39,8 +39,17 @@ export const EntriesProvider: FC<PropsWithChildren> = ({ children }) => {
         }
     }
 
-    const updateEntry = ( entry: Entry ) => {
-        dispatch({ type: "[Entry] Entry-Updated", paylod: entry })
+    const updateEntry = async ( { _id, description, status }: Entry ) => {
+
+        try {
+
+            const { data } = await entriesApi.put<Entry>(`/entries/${ _id }`, { description, status });
+            dispatch({ type: "[Entry] Entry-Updated", paylod: data });
+
+            
+        } catch (error) {
+            console.log({ error })
+        }
     }
 
     // Se ejecuta una sola vez
